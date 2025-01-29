@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skills Management</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+  <div class="min-h-screen">
+    <!-- Login Form -->
+    <div id="loginForm" class="p-8 max-w-md mx-auto mt-20">
+      <h2 class="text-2xl font-bold mb-6 text-center">Skills Management</h2>
+      <form onsubmit="handleLogin(event)" class="space-y-4 bg-white p-6 rounded-lg shadow">
+        <div>
+          <label class="block text-sm font-medium mb-1">Email</label>
+          <input type="email" id="email" required class="w-full p-2 border rounded">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Password</label>
+          <input type="password" id="password" required class="w-full p-2 border rounded" minlength="6">
+        </div>
+        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+          Login
+        </button>
+        <div class="text-center">
+          <button type="button" onclick="toggleForm()" class="text-blue-600 hover:text-blue-800">
+            Don't have an account? Sign up
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Sign Up Form -->
+    <div id="signupForm" class="p-8 max-w-md mx-auto mt-20 hidden">
+      <h2 class="text-2xl font-bold mb-6 text-center">Create Account</h2>
+      <form onsubmit="handleSignup(event)" class="space-y-4 bg-white p-6 rounded-lg shadow">
+        <div>
+          <label class="block text-sm font-medium mb-1">Full Name</label>
+          <input type="text" id="fullName" required class="w-full p-2 border rounded">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Email</label>
+          <input type="email" id="signupEmail" required class="w-full p-2 border rounded">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Password</label>
+          <input type="password" id="signupPassword" required class="w-full p-2 border rounded" minlength="6">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Role</label>
+          <select id="role" required class="w-full p-2 border rounded">
+            <option value="employee">Employee</option>
+            <option value="manager">Manager</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+          Sign Up
+        </button>
+        <div class="text-center">
+          <button type="button" onclick="toggleForm()" class="text-blue-600 hover:text-blue-800">
+            Already have an account? Login
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Main App (hidden by default) -->
+    <div id="app" class="hidden">
+      <!-- Header -->
+      <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+          <h1 class="text-xl font-bold">Skills Management</h1>
+          <div class="flex items-center gap-4">
+            <span id="userEmail" class="text-gray-600"></span>
+            <button onclick="handleLogout()" class="text-gray-600 hover:text-gray-900">Logout</button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Skills Section -->
+        <div class="bg-white rounded-lg shadow p-6 mb-8">
+          <h2 class="text-xl font-semibold mb-4">My Skills</h2>
+          <form onsubmit="handleAddSkill(event)" class="mb-6 flex gap-4">
+            <input
+              type="text"
+              id="skillName"
+              placeholder="Skill name"
+              required
+              class="flex-1 p-2 border rounded"
+            >
+            <select id="skillLevel" required class="p-2 border rounded">
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="expert">Expert</option>
+            </select>
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+              Add Skill
+            </button>
+          </form>
+          <div id="skillsList" class="space-y-2"></div>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="bg-white rounded-lg shadow p-6">
+          <h2 class="text-xl font-semibold mb-4">Available Projects</h2>
+          <div id="projectsList" class="space-y-4"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/src/main.js"></script>
+</body>
+</html>
